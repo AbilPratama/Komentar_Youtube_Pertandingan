@@ -6,21 +6,6 @@ import os
 model = joblib.load("model_random_forest.pkl")
 vectorizer = joblib.load("tfidf_vectorizer.pkl")
 
-# Kata kunci komentar positif
-positif_keywords = [
-    "bagus", "keren", "mantap", "lucu", "menarik", "suka",
-    "seru", "terbaik", "hebat", "asyik", "menyenangkan",
-    "rekomendasi", "grafik bagus", "cerita bagus", "bagus banget"
-]
-
-# Fungsi untuk deteksi keyword positif
-def keyword_sentiment(text):
-    text_lower = text.lower()
-    for keyword in positif_keywords:
-        if keyword in text_lower:
-            return "positif (berdasarkan keyword)"
-    return None
-
 # UI aplikasi Streamlit
 st.set_page_config(page_title="Klasifikasi Komentar Webtoon", layout="centered")
 st.title("📚 Klasifikasi Sentimen Komentar Webtoon")
