@@ -15,12 +15,14 @@ user_input = st.text_area("Komentar pengguna:", height=150)
 
 # Tombol klasifikasi
 if st.button("Klasifikasikan"):
-    if not user_input.strip():
-        st.warning("⚠️ Komentar tidak boleh kosong.")
-    else:
-        # Transform dan prediksi
-        input_vector = vectorizer.transform([user_input])
-        prediction = model.predict(input_vector)[0]
+    if user_input:
+        cleaned = preprocess(user_input)
+        vector = vectorizer.transform([cleaned])
+        prediction = model.predict(vector)[0]
 
-        # Tampilkan hasil klasifikasi
-        st.success(f"💬 Hasil klasifikasi: **{prediction.upper()}**")
+        if prediction == 1:
+            st.success("Klasifikasi: Sentimen Positif 😊")
+        else:
+            st.error("Klasifikasi: Sentimen Negatif 😞")
+    else:
+        st.warning("Silakan masukkan komentar terlebih dahulu.")
