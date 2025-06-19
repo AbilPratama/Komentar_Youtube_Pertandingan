@@ -16,7 +16,6 @@ user_input = st.text_area("Komentar pengguna:", height=150)
 # Tombol klasifikasi
 if st.button("Klasifikasikan"):
     if user_input:
-        cleaned = preprocess(user_input)
         vector = vectorizer.transform([cleaned])
         prediction = model.predict(vector)[0]
 
